@@ -1,18 +1,9 @@
 import React from "react"
 import Layout from "../components/layout"
 import styled from "styled-components"
-import {
-  Button,
-  Input,
-  Card,
-  notification,
-  Collapse,
-  Upload,
-  Modal,
-  Icon,
-} from "antd"
-
-import { storage } from "../config/fire"
+import { Button, Input, Card, notification, Collapse } from "antd"
+import c2 from "../images/c2.jpg"
+import { storage, urlRef } from "../config/fire"
 // import { Link } from "gatsby"
 
 const LordContainer = styled.div`
@@ -50,28 +41,53 @@ const Container = styled.div`
   border-radius: 15px;
   padding: 30px;
 `
+const Center = styled.div`
+  text-align: center;
+`
+const UploadContainer = styled.div``
 
 class EditPhotos extends React.Component {
   constructor(props) {
     super(props)
 
     this.state = {
-      crossfit: null,
-      cycling: null,
-      hardcoremax: null,
-      yoga: null,
-      zumba: null,
-      aerobic: null,
-      boxing: null,
-      calisthenics: null,
-      bodybuilding: null,
-      gymnastics: null,
-      mma: null,
-      powerlifting: null,
-      boxing: null,
-      jiujitsu: null,
-      dance: null,
-      triathlons: null,
+      clicked: 0,
+      images: {
+        crossfit: null,
+        cycling: null,
+        hardcoremax: null,
+        yoga: null,
+        zumba: null,
+        aerobic: null,
+        boxing: null,
+        calisthenics: null,
+        bodybuilding: null,
+        gymnastics: null,
+        mma: null,
+        powerlifting: null,
+        boxing: null,
+        jiujitsu: null,
+        dance: null,
+        triathlons: null,
+      },
+      url: {
+        crossfit: "",
+        cycling: "",
+        hardcoremax: "",
+        yoga: "",
+        zumba: "",
+        aerobic: "",
+        boxing: "",
+        calisthenics: "",
+        bodybuilding: "",
+        gymnastics: "",
+        mma: "",
+        powerlifting: "",
+        boxing: "",
+        jiujitsu: "",
+        dance: "",
+        triathlons: "",
+      },
     }
   }
 
@@ -81,47 +97,59 @@ class EditPhotos extends React.Component {
     })
   }
 
-  confirmHandler = () => {
-    //   this.notification("success", "Images Loaded and Set")
+  handleChange = e => {
+    const { images } = this.state
+    let holder = images
+    if (e.target.files[0]) {
+      const image = e.target.files[0]
+      holder[e.target.id] = image
+      this.setState({
+        images: holder,
+      })
+    }
+    console.log(images)
   }
 
-  changeHandler = file => {}
+  handleUpload = chosen => {
+    const { images, url } = this.state
+    let urlContainer = url
+    const uploadTask = storage.ref(`images/${chosen}`).put(images[chosen])
 
-  componentDidMount() {}
-
-  handleChange = file => {
-    console.log("this file", file)
+    uploadTask.on(
+      "state_changed",
+      snapshot => {
+        // this.notification("success", "Upload Done ")
+      },
+      error => {
+        // this.notification("error", error)
+      },
+      () => {
+        this.notification("success", "Upload Done")
+        storage
+          .ref("images")
+          .child(chosen)
+          .getDownloadURL()
+          .then(url => {
+            urlContainer[chosen] = url
+            this.setState({
+              url: urlContainer,
+            })
+          })
+          .then(() => {
+            urlRef.set(url)
+          })
+      }
+    )
   }
 
   render() {
     const { Panel } = Collapse
-
-    const uploadButton = (
-      <div>
-        <Icon type="plus" />
-        <div className="ant-upload-text">Upload</div>
-      </div>
-    )
+    const { images, url } = this.state
     return (
       <div>
         <Layout />
         <LordContainer>
           <Container>
-            <Button
-              style={{
-                backgroundColor: "##2E414F",
-                marginTop: "10px",
-                borderColor: "#2E414F",
-                marginBottom: "30px",
-                width: "100%",
-              }}
-              type="primary"
-              icon="upload"
-              size="large"
-              onClick={this.confirmHandler}
-            >
-              Update
-            </Button>
             <Collapse defaultActiveKey={["0"]}>
               {selection.map((each, index) => (
                 <Panel
@@ -133,17 +161,34 @@ class EditPhotos extends React.Component {
                     bordered={false}
                     hoverable
                     style={{
+                      textAlign: "center",
                       width: "100%",
                       height: "100%",
-                      marginBottom: "50px",
                     }}
                   >
-                    <Upload
-                      listType="picture-card"
-                      onChange={this.handleChange}
-                    >
-                      {uploadButton}
-                    </Upload>
+                    <Center>
+                      <input
+                        type="file"
+                        id={each}
+                        onChange={this.handleChange}
+                      />
+                      <button
+                        onClick={() => {
+                          this.handleUpload(each)
+                        }}
+                      >
+                        Upload
+                      </button>
+                      <div
+                        style={{
+                          margin: "auto",
+                          paddingTop: "5%",
+                          width: "500px",
+                        }}
+                      >
+                        <img src={url[each]} />
+                      </div>
+                    </Center>
                   </Card>
                 </Panel>
               ))}

@@ -14,7 +14,6 @@ const Wrapper = styled.div`
   input,
   textarea {
     width: 100%;
-    margin-bottom: 50px;
   }
   .container {
     margin-top: 5%;

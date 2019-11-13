@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, Component } from "react"
 import { Link } from "gatsby"
 import { Carousel, Button } from "antd"
 import Layout from "../components/layout"
-import Image from "../components/image"
-import SEO from "../components/seo"
+
 import styled from "styled-components"
 import c1 from "../images/c1.jpg"
 import c2 from "../images/c2.jpg"
@@ -94,107 +93,118 @@ const StyledCarousel = styled(Carousel)`
 
 const StyledCard = styled.div``
 
-const IndexPage = () => {
-  const [about1, setAbout1] = useState("")
-  const [about2, setAbout2] = useState("")
-  const [loading, setLoading] = useState(true)
-  useEffect(() => {
-    aboutusRef.get().then(doc => {
-      setAbout1(doc.data().about1)
-      setAbout2(doc.data().about2)
-      setLoading(false)
-    })
-  }, [])
-  return (
-    <Layout>
-      <StyledCarousel autoplay dotPosition="top">
-        <div>
-          <img src={c1} />
-        </div>
-        <div>
-          <img src={c2} />
-        </div>
-        <div>
-          <img src={c1} />
-        </div>
-        <div>
-          <img src={c2} />
-        </div>
-      </StyledCarousel>
-      <Button
-        type="primary"
-        style={{
-          backgroundColor: "#FF8900",
-          width: "180px",
-          height: "50px",
-          borderColor: "#FF8900",
-          borderRadius: "0px",
-          position: "fixed",
-          top: 140,
-          right: -65,
-          zIndex: 1000,
-          transform: "rotate(270deg)",
-        }}
-      >
-        TRY US FOR FREE
-      </Button>
+class IndexPage extends Component {
+  constructor(props) {
+    super(props)
 
-      <AboutUs>
-        <div className="left-panel">
-          <h1>About Us</h1>
-          <p>
-            {/* Amet exercitation enim id sit sunt elit voluptate laborum officia
+    this.state = {
+      about1: "",
+      about2: "",
+    }
+  }
+
+  componentWillMount() {
+    aboutusRef.get().then(doc => {
+      this.setState({
+        about1: doc.data().about1,
+        about2: doc.data().about2,
+      })
+    })
+  }
+
+  render() {
+    const { about1, about2 } = this.state
+    return (
+      <Layout>
+        <StyledCarousel autoplay dotPosition="top">
+          <div>
+            <img src={c1} />
+          </div>
+          <div>
+            <img src={c2} />
+          </div>
+          <div>
+            <img src={c1} />
+          </div>
+          <div>
+            <img src={c2} />
+          </div>
+        </StyledCarousel>
+        <Button
+          type="primary"
+          style={{
+            backgroundColor: "#FF8900",
+            width: "180px",
+            height: "50px",
+            borderColor: "#FF8900",
+            borderRadius: "0px",
+            position: "fixed",
+            top: 140,
+            right: -65,
+            zIndex: 1000,
+            transform: "rotate(270deg)",
+          }}
+        >
+          TRY US FOR FREE
+        </Button>
+
+        <AboutUs>
+          <div className="left-panel">
+            <h1>About Us</h1>
+            <p>
+              {/* Amet exercitation enim id sit sunt elit voluptate laborum officia
             non ipsum elit nulla. Tempor sit excepteur non adipisicing
             exercitation ut eu est do nulla. Ipsum eu aliquip velit culpa minim.
             Dolor non sint irure tempor sunt nisi nostrud ut voluptate
             excepteur. */}
-            {about1}
-          </p>
-          <p>
-            {/* Id id aliqua non qui laboris proident et sunt culpa magna. Ad
+              {about1}
+            </p>
+            <p>
+              {/* Id id aliqua non qui laboris proident et sunt culpa magna. Ad
             proident id exercitation consequat sunt enim. Consectetur laborum
             adipisicing non adipisicing culpa adipisicing. */}
-            {about2}
-          </p>
-        </div>
-        <div className="right-panel">
-          <img src={c2} alt="" />
-        </div>
-      </AboutUs>
+              {about2}
+            </p>
+          </div>
+          <div className="right-panel">
+            <img src={c2} alt="" />
+          </div>
+        </AboutUs>
 
-      <Section1>
-        <h2>Activities We Offer</h2>
+        <Section1>
+          <h2>Activities We Offer</h2>
 
-        <div className="card-container">
-          <Link to="/activity/yoga">
-            <div className="card">
-              <img src={CROSSFIT} alt="" />
-            </div>
-          </Link>
-          <Link to="/activity/crossfit">
-            <div className="card">
-              <img src={c1} alt="" />
-            </div>
-          </Link>
-          <Link to="/activity/cycling">
-            <div className="card">
-              <img src={c1} alt="" />
-            </div>
-          </Link>
-          <Link to="/activity/zumba">
-            <div className="card">
-              <img src={c1} alt="" />
-            </div>
-          </Link>
-          <Link to="/activity/hardcoremax">
-            <div className="card">
-              <img src={c1} alt="" />
-            </div>
-          </Link>
-        </div>
-      </Section1>
-    </Layout>
-  )
+          <div className="card-container">
+            <Link to="/activity/yoga">
+              <div className="card">
+                <img src={CROSSFIT} alt="" />
+              </div>
+            </Link>
+            <Link to="/activity/crossfit">
+              <div className="card">
+                <img src={c1} alt="" />
+              </div>
+            </Link>
+            <Link to="/activity/cycling">
+              <div className="card">
+                <img src={c1} alt="" />
+              </div>
+            </Link>
+            <Link to="/activity/zumba">
+              <div className="card">
+                <img src={c1} alt="" />
+              </div>
+            </Link>
+            <Link to="/activity/hardcoremax">
+              <div className="card">
+                <img src={c1} alt="" />
+              </div>
+            </Link>
+          </div>
+        </Section1>
+      </Layout>
+    )
+  }
 }
 
 export default IndexPage

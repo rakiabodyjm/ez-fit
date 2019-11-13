@@ -31,6 +31,34 @@ const contentsRef = database.collection("Contents")
 const aboutusRef = contentsRef.doc("0252VL1TQmNiQv1ghssD")
 const faqsRef = contentsRef.doc("faqs")
 const actsRef = contentsRef.doc("activities")
-
+const urlRef = contentsRef.doc("urls")
 const storage = firebase.storage()
-export { actsRef, database, aboutusRef, faqsRef, app as default }
+
+const selection = [
+  "crossfit",
+  "cycling",
+  "hardcoremax",
+  "yoga",
+  "zumba",
+  "aerobic",
+  "boxing",
+  "calisthenics",
+  "bodybuilding",
+  "gymnastics",
+  "mma",
+  "powerlifting",
+  "jiujitsu",
+  "dance",
+  "triathlons",
+]
+
+export {
+  selection,
+  storage,
+  urlRef,
+  actsRef,
+  database,
+  aboutusRef,
+  faqsRef,
+  app as default,
+}
