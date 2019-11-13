@@ -125,8 +125,6 @@ const StyledCarousel = styled(Carousel)`
   }
 `
 
-const StyledCard = styled.div``
-
 const Template = props => {
   const [activities, setActivities] = useState(
     actsRef.get().then(doc => {
