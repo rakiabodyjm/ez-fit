@@ -4,7 +4,6 @@ import styled from "styled-components"
 import { Button, Input, Card, notification, Collapse } from "antd"
 
 import { actsRef, faqsRef } from "../config/fire"
-// import { Link, Route, BrowserRouter } from "react-router-dom"
 // import { Link } from "gatsby"
 
 const LordContainer = styled.div`

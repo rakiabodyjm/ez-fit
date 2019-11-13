@@ -13,7 +13,6 @@ import {
 } from "antd"
 
 import { storage } from "../config/fire"
-// import { Link, Route, BrowserRouter } from "react-router-dom"
 // import { Link } from "gatsby"
 
 const LordContainer = styled.div`

@@ -8,8 +8,6 @@ import c2 from "../images/c2.jpg"
 import { actsRef } from "../config/fire"
 import { Router, Link } from "@reach/router"
 
-// import { Route, BrowserRouter } from "react-router-dom"
-
 const Section1 = styled.div`
   height: 100vh;
   padding: 3% 1.5% 0% 1.5%;
