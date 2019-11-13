@@ -86,7 +86,7 @@ class EditPhotos extends React.Component {
     //   this.notification("success", "Images Loaded and Set")
   }
 
-  changeHandler = e => {}
+  changeHandler = file => {}
 
   componentDidMount() {}
 
