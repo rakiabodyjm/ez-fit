@@ -128,9 +128,7 @@ const StyledCarousel = styled(Carousel)`
 const StyledCard = styled.div``
 
 const Template = props => {
-  const [activities, setActivities] = useState()
-  const [description, setDescription] = useState("")
-  useEffect(() => {
+  const [activities, setActivities] = useState(
     actsRef.get().then(doc => {
       setActivities({
         crossfit: doc.data().crossfit,
@@ -151,8 +149,10 @@ const Template = props => {
         triathlons: doc.data().triathlons,
       })
     })
-    console.log(activities)
-  })
+  )
+  const [description, setDescription] = useState("")
+  const [loading, setLoading] = useState(false)
+
   return (
     <Layout>
       <Wrapper>

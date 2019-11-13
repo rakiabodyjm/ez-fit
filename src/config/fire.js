@@ -1,5 +1,6 @@
-import * as firebase from "firebase/app"
-
+import firebase from "firebase"
+import "firebase/firestore"
+import "firebase/storage"
 // var firebaseConfig = {
 //   apiKey: "AIzaSyCrlx7OMxTwe9gglFAheuDq6uOqTJ5DCfU",
 //   authDomain: "ezfit-5e2bd.firebaseapp.com",

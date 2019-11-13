@@ -95,15 +95,26 @@ const StyledCarousel = styled(Carousel)`
 const StyledCard = styled.div``
 
 const IndexPage = () => {
-  const [about1, setAbout1] = useState("")
-  const [about2, setAbout2] = useState("")
-
-  useEffect(() => {
+  const [about1, setAbout1] = useState(
     aboutusRef.get().then(doc => {
       setAbout1(doc.data().about1)
+    })
+  )
+  const [about2, setAbout2] = useState(
+    aboutusRef.get().then(doc => {
       setAbout2(doc.data().about2)
     })
-  })
+  )
+
+  // const [loading, setLoading] = useState(true)
+
+  // useEffect(() => {
+  //   aboutusRef.get().then(doc => {
+  //     setAbout1(doc.data().about1)
+  //     setAbout2(doc.data().about2)
+  //     setLoading(false)
+  //   })
+  // }, [])
   return (
     <Layout>
       <StyledCarousel autoplay dotPosition="top">
