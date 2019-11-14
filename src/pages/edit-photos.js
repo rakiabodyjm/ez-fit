@@ -32,10 +32,7 @@ const selection = [
 ]
 
 const Container = styled.div`
-  /* display: flex;
-  justify-content: center; */
-  background: #f8f8ff;
-  /* margin-top: 100px; */
+  background: #f4f4f4;
   min-height: 450px;
   width: 100%;
   border-radius: 15px;
@@ -89,6 +86,14 @@ class EditPhotos extends React.Component {
         triathlons: "",
       },
     }
+  }
+
+  componentWillMount() {
+    urlRef.get().then(doc => {
+      this.setState({
+        url: doc.data(),
+      })
+    })
   }
 
   notification = (type, message) => {
@@ -183,7 +188,7 @@ class EditPhotos extends React.Component {
                         style={{
                           margin: "auto",
                           paddingTop: "5%",
-                          width: "500px",
+                          maxWidth: "500px",
                         }}
                       >
                         <img src={url[each]} />

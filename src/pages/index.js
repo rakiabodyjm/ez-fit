@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Component } from "react"
+import React, { Component } from "react"
 import { Link } from "gatsby"
 import { Carousel, Button } from "antd"
 import Layout from "../components/layout"
@@ -6,9 +6,8 @@ import Layout from "../components/layout"
 import styled from "styled-components"
 import c1 from "../images/c1.jpg"
 import c2 from "../images/c2.jpg"
-import CROSSFIT from "../images/CROSSFIT.jpg"
 
-import { aboutusRef } from "../config/fire"
+import { aboutusRef, urlRef, selection } from "../config/fire"
 const Section1 = styled.div`
   height: 100vh;
   padding: 3% 1.5% 0% 1.5%;
@@ -20,7 +19,7 @@ const Section1 = styled.div`
     width: 100%;
     margin-top: 2%;
     display: flex;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     @media screen and (max-width: 600px) {
       flex-direction: column;
     }
@@ -100,6 +99,7 @@ class IndexPage extends Component {
     this.state = {
       about1: "",
       about2: "",
+      url: {},
     }
   }
 
@@ -110,10 +110,17 @@ class IndexPage extends Component {
         about2: doc.data().about2,
       })
     })
+
+    urlRef.get().then(doc => {
+      this.setState({
+        url: doc.data(),
+      })
+    })
   }
 
   render() {
-    const { about1, about2 } = this.state
+    const { about1, about2, url } = this.state
+
     return (
       <Layout>
         <StyledCarousel autoplay dotPosition="top">
@@ -174,33 +181,31 @@ class IndexPage extends Component {
         <Section1>
           <h2>Activities We Offer</h2>
 
-          <div className="card-container">
-            <Link to="/activity/yoga">
-              <div className="card">
-                <img src={CROSSFIT} alt="" />
+          {selection.map((each, index) => {
+            {
+              /* index === 0 ? (
+              <div className="card-container">
+                {this.renderer(each, index, url)}
               </div>
-            </Link>
-            <Link to="/activity/crossfit">
-              <div className="card">
-                <img src={c1} alt="" />
+            ) : index === 4 ? (
+              <div className="card-container">
+                {" "}
+                <div className="card-container">
+                  {this.renderer(each, index, url)}
+                </div>
               </div>
-            </Link>
-            <Link to="/activity/cycling">
-              <div className="card">
-                <img src={c1} alt="" />
+            ) : index === 14 ? (
+              <div className="card-container">
+                {" "}
+                <div className="card-container">
+                  {this.renderer(each, index, url)}
+                </div>
               </div>
-            </Link>
-            <Link to="/activity/zumba">
-              <div className="card">
-                <img src={c1} alt="" />
-              </div>
-            </Link>
-            <Link to="/activity/hardcoremax">
-              <div className="card">
-                <img src={c1} alt="" />
-              </div>
-            </Link>
-          </div>
+            ) : (
+              ""
+            ) */
+            }
+          })}
         </Section1>
       </Layout>
     )

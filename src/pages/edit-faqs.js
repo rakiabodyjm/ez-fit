@@ -28,7 +28,7 @@ const Wrapper = styled.div`
       text-align: center;
       padding: 30px;
       display: block;
-      border: 5px solid black;
+      /* border: 5px solid black; */
       flex: 1;
       height: 500px;
       margin-right: 30px;
@@ -67,6 +67,18 @@ const Wrapper = styled.div`
     }
   }
 `
+const btnStyle = {
+  backgroundColor: "#FF8900",
+  width: "180px",
+  height: "50px",
+  borderColor: "#FF8900",
+  borderRadius: "0px",
+  // position: "fixed",
+  // top: 140,
+  // right: -65,
+  // zIndex: 1000,
+  // transform: "rotate(270deg)",
+}
 
 class FaqsPage extends React.Component {
   constructor(props) {
@@ -205,6 +217,7 @@ class FaqsPage extends React.Component {
               <Input
                 id="newFaq"
                 onChange={this.handleChange}
+                onPaste={this.handleChange}
                 value={this.state.newFaq}
               />
               <h5>Answer</h5>
@@ -213,22 +226,26 @@ class FaqsPage extends React.Component {
                 rows={4}
                 id="newAns"
                 onChange={this.handleChange}
+                onPaste={this.handleChange}
                 value={this.state.newAns}
               />
-
-              <Button
+              <div
                 style={{
-                  backgroundColor: "##2E414F",
+                  display: "flex",
+                  justifyContent: "center",
                   marginTop: "10px",
-                  borderColor: "#2E414F",
                 }}
-                type="primary"
-                icon="upload"
-                size="large"
-                onClick={this.createHandler}
               >
-                Update
-              </Button>
+                <Button
+                  style={btnStyle}
+                  type="primary"
+                  icon="upload"
+                  size="large"
+                  onClick={this.createHandler}
+                >
+                  Add
+                </Button>
+              </div>
             </div>
           </div>
         </Wrapper>

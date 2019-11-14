@@ -47,23 +47,7 @@ class EditActivities extends React.Component {
     super(props)
 
     this.state = {
-      activities: {
-        crossfit: "",
-        cycling: "",
-        hardcoremax: "",
-        yoga: "",
-        zumba: "",
-        aerobic: "",
-        boxing: "",
-        calisthenics: "",
-        bodybuilding: "",
-        gymnastics: "",
-        mma: "",
-        powerlifting: "",
-        jiujitsu: "",
-        dance: "",
-        triathlons: "",
-      },
+      activities: {},
     }
   }
 
@@ -96,24 +80,7 @@ class EditActivities extends React.Component {
   componentDidMount() {
     actsRef.get().then(doc => {
       this.setState({
-        activities: {
-          crossfit: doc.data().crossfit,
-          cycling: doc.data().cycling,
-          hardcoremax: doc.data().hardcoremax,
-          yoga: doc.data().yoga,
-          zumba: doc.data().zumba,
-          aerobic: doc.data().aerobic,
-          boxing: doc.data().boxing,
-          calisthenics: doc.data().calisthenics,
-          bodybuilding: doc.data().bodybuilding,
-          gymnastics: doc.data().gymnastics,
-          mma: doc.data().mma,
-          powerlifting: doc.data().powerlifting,
-          boxing: doc.data().boxing,
-          jiujitsu: doc.data().jiujitsu,
-          dance: doc.data().dance,
-          triathlons: doc.data().triathlons,
-        },
+        activities: doc.data(),
       })
     })
   }
