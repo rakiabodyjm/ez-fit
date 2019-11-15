@@ -28,7 +28,6 @@ const ManageLayout = styled.div`
   }
 
   li a {
-    vertical-align: bottom;
     align-self: auto;
     display: block;
     color: white;
