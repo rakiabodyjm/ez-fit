@@ -5,6 +5,8 @@ import styled from "styled-components"
 import c2 from "../images/c2.jpg"
 import { Link } from "gatsby"
 import { faqsRef } from "../config/fire"
+import Manage from "./manage"
+
 const { TextArea } = Input
 
 const Wrapper = styled.div`
@@ -114,19 +116,23 @@ class FaqsPage extends React.Component {
       answers: copyAns,
     })
 
-    faqsRef
-      .set({ faq: copyFaqs, answers: copyAns })
-      .then(() => {
-        this.notification("success", "FAQS Saved")
-      })
-      .catch(error => {
-        this.notification("error", error)
-      })
+    if (newFaq.length < 1 || newAns.length < 1) {
+      this.notification("error", "received empty FAQs field")
+    } else {
+      faqsRef
+        .set({ faq: copyFaqs, answers: copyAns })
+        .then(() => {
+          this.notification("success", "FAQS Saved")
+        })
+        .catch(error => {
+          this.notification("error", error)
+        })
 
-    this.setState({
-      newFaq: "",
-      newAns: "",
-    })
+      this.setState({
+        newFaq: "",
+        newAns: "",
+      })
+    }
   }
 
   deleteHandler = index => {
@@ -171,7 +177,8 @@ class FaqsPage extends React.Component {
   render() {
     const { faqs, answers, hidden } = this.state
     return (
-      <Layout>
+      <div>
+        <Manage />
         <Wrapper>
           <div className="container">
             <div className="left-panel">
@@ -249,7 +256,7 @@ class FaqsPage extends React.Component {
             </div>
           </div>
         </Wrapper>
-      </Layout>
+      </div>
     )
   }
 }

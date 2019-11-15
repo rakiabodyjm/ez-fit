@@ -32,6 +32,8 @@ const aboutusRef = contentsRef.doc("0252VL1TQmNiQv1ghssD")
 const faqsRef = contentsRef.doc("faqs")
 const actsRef = contentsRef.doc("activities")
 const urlRef = contentsRef.doc("urls")
+const carouselUrlRef = contentsRef.doc("carouselurl")
+
 const storage = firebase.storage()
 
 const selection = [
@@ -55,6 +57,7 @@ const selection = [
 export {
   selection,
   storage,
+  carouselUrlRef,
   urlRef,
   actsRef,
   database,

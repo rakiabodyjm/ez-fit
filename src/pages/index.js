@@ -7,7 +7,8 @@ import styled from "styled-components"
 import c1 from "../images/c1.jpg"
 import c2 from "../images/c2.jpg"
 
-import { aboutusRef, urlRef, selection } from "../config/fire"
+import { aboutusRef, urlRef, selection, carouselUrlRef } from "../config/fire"
+import Column from "antd/lib/table/Column"
 const Section1 = styled.div`
   height: 100vh;
   padding: 3% 1.5% 0% 1.5%;
@@ -90,8 +91,6 @@ const StyledCarousel = styled(Carousel)`
   }
 `
 
-const StyledCard = styled.div``
-
 class IndexPage extends Component {
   constructor(props) {
     super(props)
@@ -100,6 +99,10 @@ class IndexPage extends Component {
       about1: "",
       about2: "",
       url: {},
+      carouselurl: {},
+      first: [],
+      second: [],
+      third: [],
     }
   }
 
@@ -116,25 +119,76 @@ class IndexPage extends Component {
         url: doc.data(),
       })
     })
+
+    carouselUrlRef.get().then(doc => {
+      this.setState({
+        carouselurl: doc.data(),
+      })
+    })
+
+    this.slicer()
+  }
+
+  slicer = () => {
+    const { first, second, third } = this.state
+
+    selection.forEach((each, index) => {
+      if (index < 5) {
+        let firstTemp = first
+        firstTemp.push(each)
+        this.setState({
+          first: firstTemp,
+        })
+      }
+      if (index >= 5 && index < 10) {
+        let secondTemp = second
+        secondTemp.push(each)
+        this.setState({
+          second: secondTemp,
+        })
+      }
+      if (index >= 10) {
+        let thirdTemp = third
+        thirdTemp.push(each)
+        this.setState({
+          third: thirdTemp,
+        })
+      }
+    })
+    console.log("first", first)
+    console.log("second", second)
+
+    console.log("third", third)
   }
 
   render() {
-    const { about1, about2, url } = this.state
+    const {
+      about1,
+      about2,
+      url,
+      carouselurl,
+      first,
+      second,
+      third,
+    } = this.state
 
     return (
       <Layout>
         <StyledCarousel autoplay dotPosition="top">
           <div>
-            <img src={c1} />
+            <img src={carouselurl["image1"]} />
           </div>
           <div>
-            <img src={c2} />
+            <img src={carouselurl["image2"]} />
           </div>
           <div>
-            <img src={c1} />
+            <img src={carouselurl["image3"]} />
           </div>
           <div>
-            <img src={c2} />
+            <img src={carouselurl["image4"]} />
+          </div>
+          <div>
+            <img src={carouselurl["image5"]} />
           </div>
         </StyledCarousel>
         <Button
@@ -181,31 +235,48 @@ class IndexPage extends Component {
         <Section1>
           <h2>Activities We Offer</h2>
 
-          {selection.map((each, index) => {
-            {
-              /* index === 0 ? (
-              <div className="card-container">
-                {this.renderer(each, index, url)}
-              </div>
-            ) : index === 4 ? (
-              <div className="card-container">
-                {" "}
-                <div className="card-container">
-                  {this.renderer(each, index, url)}
+          <div className="card-container">
+            {first.map((each, index) => (
+              <Link
+                style={{
+                  maxWidth: "20%",
+                }}
+                to={`/activity/${each}`}
+              >
+                <div className="card" style={{ flexDirection: Column }}>
+                  <img src={url[each] ? url[each] : c2} alt="" />
                 </div>
-              </div>
-            ) : index === 14 ? (
-              <div className="card-container">
-                {" "}
-                <div className="card-container">
-                  {this.renderer(each, index, url)}
+              </Link>
+            ))}
+          </div>
+          <div className="card-container">
+            {second.map((each, index) => (
+              <Link
+                style={{
+                  maxWidth: "20%",
+                }}
+                to={`/activity/${each}`}
+              >
+                <div className="card" style={{ flexDirection: Column }}>
+                  <img src={url[each] ? url[each] : c2} alt="" />
                 </div>
-              </div>
-            ) : (
-              ""
-            ) */
-            }
-          })}
+              </Link>
+            ))}
+          </div>
+          <div className="card-container">
+            {third.map((each, index) => (
+              <Link
+                style={{
+                  maxWidth: "20%",
+                }}
+                to={`/activity/${each}`}
+              >
+                <div className="card" style={{ flexDirection: Column }}>
+                  <img src={url[each] ? url[each] : c2} alt="" />
+                </div>
+              </Link>
+            ))}
+          </div>
         </Section1>
       </Layout>
     )

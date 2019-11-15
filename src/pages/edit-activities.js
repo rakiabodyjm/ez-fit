@@ -2,7 +2,7 @@ import React from "react"
 import Layout from "../components/layout"
 import styled from "styled-components"
 import { Button, Input, Card, notification, Collapse } from "antd"
-
+import Manage from "./manage"
 import { actsRef, faqsRef } from "../config/fire"
 // import { Link } from "gatsby"
 
@@ -91,7 +91,7 @@ class EditActivities extends React.Component {
 
     return (
       <div>
-        <Layout />
+        <Manage />
         <LordContainer>
           <Container>
             <Button

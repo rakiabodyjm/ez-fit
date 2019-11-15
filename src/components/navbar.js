@@ -114,31 +114,31 @@ class Navbar extends React.Component {
           <div style={{ borderTop: "1px solid black" }}>
             <h3 style={{ marginTop: "10%" }}>Activities</h3>
             <p>
-              <Link to="/yoga/" style={{ color: "#2e414f" }}>
+              <Link to="/activity/yoga/" style={{ color: "#2e414f" }}>
                 YOGA
               </Link>
             </p>
             <p>
               {" "}
-              <Link to="/crossfit/" style={{ color: "#2e414f" }}>
+              <Link to="/activity/crossfit/" style={{ color: "#2e414f" }}>
                 Crossfit
               </Link>
             </p>
             <p>
               {" "}
-              <Link to="/cycling/" style={{ color: "#2e414f" }}>
+              <Link to="/activity/cycling/" style={{ color: "#2e414f" }}>
                 Cycling
               </Link>
             </p>{" "}
             <p>
               {" "}
-              <Link to="/zumba/" style={{ color: "#2e414f" }}>
+              <Link to="/activity/zumba/" style={{ color: "#2e414f" }}>
                 Zumba
               </Link>
             </p>{" "}
             <p>
               {" "}
-              <Link to="/hardcoremax/" style={{ color: "#2e414f" }}>
+              <Link to="/activity/hardcoremax/" style={{ color: "#2e414f" }}>
                 Hardcoremax
               </Link>
             </p>{" "}

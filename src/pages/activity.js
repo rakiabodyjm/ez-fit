@@ -5,7 +5,7 @@ import Image from "../components/image"
 import styled from "styled-components"
 import c1 from "../images/c1.jpg"
 import c2 from "../images/c2.jpg"
-import { actsRef } from "../config/fire"
+import { actsRef, urlRef, selection } from "../config/fire"
 import { Router, Link } from "@reach/router"
 
 const Section1 = styled.div`
@@ -148,6 +148,11 @@ const Template = props => {
       })
     })
   )
+  const [url, setUrl] = useState(
+    urlRef.get().then(doc => {
+      setUrl(doc.data())
+    })
+  )
   const [description, setDescription] = useState("")
   const [loading, setLoading] = useState(false)
 
@@ -160,7 +165,7 @@ const Template = props => {
 
         <div className="container">
           <div className="left-panel">
-            <img src={c2} alt="" />
+            <img src={url[props.act]} alt="" />
           </div>
           <div className="right-panel">
             <h3>{props.act}</h3>

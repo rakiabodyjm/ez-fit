@@ -8,6 +8,7 @@ import styled from "styled-components"
 import c1 from "../images/c1.jpg"
 import c2 from "../images/c2.jpg"
 import { aboutusRef } from "../config/fire"
+import Manage from "./manage"
 const LordContainer = styled.div`
   padding: 10% 15%;
   background: #f4f4f4;
@@ -80,7 +81,8 @@ class EditPage extends React.Component {
   }
   render() {
     return (
-      <Layout>
+      <div>
+        <Manage />
         <LordContainer>
           <Container>
             <h1>About Us</h1>
@@ -122,7 +124,7 @@ class EditPage extends React.Component {
             </div>
           </Container>
         </LordContainer>
-      </Layout>
+      </div>
     )
   }
 }
